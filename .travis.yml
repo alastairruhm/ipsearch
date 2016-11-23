@@ -2,8 +2,16 @@ language: go
 go: 
  - 1.7
 
+install:
+  - go get code.google.com/p/go.tools/cmd/cover
+  - go get github.com/mattn/goveralls
+
 script:
- - go test -v ./...
+ - go test -v -covermode=count -coverprofile=coverage.out
+ - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 notifications:
   slack: ruhm-pacino:vcSqblVd1vSDgaOzWLNbThfS
+
+env:
+  secure: qSFNlEx1zdct2pLLbI7e9BaIdrQR04MROemZ2Gquv88W2SSppV1hsk3injVRM0sYpibWpn56ghoZQDD6f/Tc9g0ii4Un+FPdtxJzqV9SusbX/NikW2b5s/OG9ye6EBnCJe//gbyZnnSXLNdQrNHr8pjJAQnyNeqT+T35McQ1u//SQU6HBLpeccDoAXgkvMi1YaWxEIy4YCAm3kCWkkML9a0BYQB6n5Xjwumt9uC3Ki7ASeMU5hUw5s1n9yF9m7+i30Yy/xotfSXYGMQcar1WNq2w6Eq1KoHNZXUz+xKhNzlCOjDTkDz3C6xIUzHePoNsd+jJBXI5DWJ0UGZGF14OSawJC7BQTdEiiz0h5liKlqop90zspcQti6U/SXOiJBoFRrDNxQgHTe8G6jypHjrljGBGvgCiBCjg1csgDbMxvqeqEdANQlLtC5v1ut0JiWG9V7U7F3lWuzOdTWeeK8dfUjqXlhz+nMhmCpWDTPQebdWrDN1AF4WnJNM1mpXrZn7N8vhWY1B8IapRgo3H8IdvQ/T+FpOOK+NWiXHovSywy484sku1TA7Mv36d0YrO/hj+CsZmMAoFm7eIFui+T9MismPFjBJ8lC6VcwAwbAdQ2ut3xKFu8+3wChsfMAuk8kR4X/wHaNCsYg4038RxSSs3Il2aEUaY+WtPoXcLer4wr8k=

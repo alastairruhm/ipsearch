@@ -1,4 +1,4 @@
-<a href="https://zenhub.com"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>[![Build Status](https://travis-ci.org/alastairruhm/ipsearch.svg?branch=master)](https://travis-ci.org/alastairruhm/ipsearch) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/alastairruhm/ipsearch.svg?branch=master)](https://travis-ci.org/alastairruhm/ipsearch) [![Coverage Status](https://coveralls.io/repos/github/alastairruhm/ipsearch/badge.svg?branch=master)](https://coveralls.io/github/alastairruhm/ipsearch?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 # ipsearch
 
