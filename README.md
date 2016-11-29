@@ -1,7 +1,8 @@
-[![GitHub release](https://img.shields.io/github/release/alastairruhm/ipsearch.svg)](https://github.com/alastairruhm/ipsearch/releases)
+[![GitHub release](https://img.shields.io/github/release/alastairruhm/ipsearch.svg)](https://github.com/alastairruhm/ipsearch/releases) 
 [![Build Status](https://travis-ci.org/alastairruhm/ipsearch.svg?branch=master)](https://travis-ci.org/alastairruhm/ipsearch) 
 [![Coverage Status](https://coveralls.io/repos/github/alastairruhm/ipsearch/badge.svg?branch=master)](https://coveralls.io/github/alastairruhm/ipsearch?branch=master) 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Go Report Card](https://goreportcard.com/badge/github.com/alastairruhm/ipsearch)](https://goreportcard.com/report/github.com/alastairruhm/ipsearch) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) 
 
 # ipsearch
 
