@@ -2,7 +2,7 @@
 # Build customization
 build:
   main: main.go
-  binary: ipsarch
+  binary: ipsearch
   goos:
     - windows
     - darwin
