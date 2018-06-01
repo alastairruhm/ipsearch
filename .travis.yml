@@ -6,7 +6,6 @@ go:
 
 install:
   - go get github.com/mitchellh/gox
-  # - go get github.com/tcnksm/ghr
   - go get github.com/mattn/goveralls
 
 script:
@@ -18,14 +17,7 @@ after_success:
   # - gox -os "linux darwin" -arch "386 amd64" -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}"
   - test -n "$TRAVIS_TAG" && curl -sL https://git.io/goreleaser | bash
 
-# deploy:
-#   provider: script
-#   script: ghr --username alastairruhm --token $GITHUB_TOKEN --replace --debug $(git tag -l --contains HEAD) dist/
-#   on:
-#     tags: true
-
 notifications:
-  slack: ruhm-pacino:vcSqblVd1vSDgaOzWLNbThfS
-
-env:
-  secure: qSFNlEx1zdct2pLLbI7e9BaIdrQR04MROemZ2Gquv88W2SSppV1hsk3injVRM0sYpibWpn56ghoZQDD6f/Tc9g0ii4Un+FPdtxJzqV9SusbX/NikW2b5s/OG9ye6EBnCJe//gbyZnnSXLNdQrNHr8pjJAQnyNeqT+T35McQ1u//SQU6HBLpeccDoAXgkvMi1YaWxEIy4YCAm3kCWkkML9a0BYQB6n5Xjwumt9uC3Ki7ASeMU5hUw5s1n9yF9m7+i30Yy/xotfSXYGMQcar1WNq2w6Eq1KoHNZXUz+xKhNzlCOjDTkDz3C6xIUzHePoNsd+jJBXI5DWJ0UGZGF14OSawJC7BQTdEiiz0h5liKlqop90zspcQti6U/SXOiJBoFRrDNxQgHTe8G6jypHjrljGBGvgCiBCjg1csgDbMxvqeqEdANQlLtC5v1ut0JiWG9V7U7F3lWuzOdTWeeK8dfUjqXlhz+nMhmCpWDTPQebdWrDN1AF4WnJNM1mpXrZn7N8vhWY1B8IapRgo3H8IdvQ/T+FpOOK+NWiXHovSywy484sku1TA7Mv36d0YrO/hj+CsZmMAoFm7eIFui+T9MismPFjBJ8lC6VcwAwbAdQ2ut3xKFu8+3wChsfMAuk8kR4X/wHaNCsYg4038RxSSs3Il2aEUaY+WtPoXcLer4wr8k=
+  email:
+    recipients:
+    - alastairruhm@gmail.com
