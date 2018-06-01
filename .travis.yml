@@ -12,6 +12,7 @@ install:
 script:
  - go test -v -covermode=count -coverprofile=coverage.out
  - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
+ - rm -f coverage.out
 
 after_success:
   # - gox -os "linux darwin" -arch "386 amd64" -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}"
