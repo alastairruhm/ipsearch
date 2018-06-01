@@ -19,35 +19,7 @@ func Test_main(t *testing.T) {
 	}
 }
 
-func Test_trimSlice(t *testing.T) {
-	type args struct {
-		src    []string
-		cutset string
-	}
-	tests := []struct {
-		name string
-		args args
-		want []string
-	}{
-		{
-			"test trim quota rune",
-			args{
-				[]string{"\"中国\"", "\"天津\"", "\"天津\"", "\"\"", "\"鹏博士\""},
-				"\"",
-			},
-			[]string{"中国", "天津", "天津", "鹏博士"},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := trimSlice(tt.args.src, tt.args.cutset); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("trimSlice() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func Test_extractData(t *testing.T) {
+func Test_formatResData(t *testing.T) {
 	type args struct {
 		src string
 	}
@@ -57,7 +29,7 @@ func Test_extractData(t *testing.T) {
 		want []string
 	}{
 		{
-			"test extractData",
+			"test formatResData",
 			args{
 				`["中国","天津","天津","","鹏博士"]`,
 			},
@@ -66,8 +38,8 @@ func Test_extractData(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := extractData(tt.args.src); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("extractData() = %v, want %v", got, tt.want)
+			if got := formatResData(tt.args.src); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("formatResData() = %v, want %v", got, tt.want)
 			}
 		})
 	}

@@ -26,28 +26,52 @@ func main() {
 	}
 	ips, err := parseInputToTargetIPS(input)
 	for _, ip := range ips {
-		requestAPI(ip)
-		// avoid 403 when request free API
+		result, err := requestAPI(ip)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println(result)
+		}
+
+		// wait 1s to avoid error 403 when request free API
 		time.Sleep(time.Second)
 	}
 }
 
-// trimSlice trim cutset of element in slice
-func trimSlice(src []string, cutset string) []string {
-	var dest []string
-	for _, s := range src {
-		if strings.Trim(s, cutset) != "" {
-			dest = append(dest, strings.Trim(s, cutset))
-		}
+// requestAPI
+func requestAPI(ip string) (string, error) {
+	resp, err := http.Get(IpipAPIURL + ip)
+	if err != nil {
+		return "", err
 	}
-	return dest
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	s := formatResData(string(body))
+
+	location := strings.Join(s, "-")
+	return fmt.Sprintf("%s %s", ip, location), nil
 }
 
-// extractData trim leading and trailing "[" and "]"
-func extractData(src string) []string {
-	dest := strings.Trim(src, "[]")
-	destSlice := trimSlice(strings.Split(dest, ","), "\"")
-	return destSlice
+// formatResData format http response data
+// string `["中国","天津","天津","","鹏博士"]` => []string{"中国", "天津", "天津", "鹏博士"}
+func formatResData(src string) []string {
+	// trim trainling newline unicode
+	temp := strings.TrimSpace(src)
+	// trim leading and trailing "[" and "]"
+	dest := strings.Trim(temp, "[]")
+
+	var results []string
+	temps := strings.Split(dest, ",")
+	// remove leading and trailing " symbol
+	for _, s := range temps {
+		if s != `""` {
+			results = append(results, strings.Trim(s, `"`))
+		}
+	}
+	return results
 }
 
 // LookupIP mock test
@@ -115,17 +139,4 @@ func isURL(raw string) bool {
 		return false
 	}
 	return true
-}
-
-// requestAPI
-func requestAPI(ip string) {
-	resp, err := http.Get(IpipAPIURL + ip)
-	if err != nil {
-		fmt.Printf("http client error %v", err)
-	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	s := extractData(string(body))
-	location := strings.Join(s, "-")
-	fmt.Println(ip + " " + location)
 }
