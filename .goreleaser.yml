@@ -1,0 +1,55 @@
+# goreleaser.yml
+# Build customization
+build:
+  main: main.go
+  binary: ipsarch
+  goos:
+    - windows
+    - darwin
+    - linux
+  goarch:
+    - amd64
+  ldflags: -s -w
+release:
+  github:
+    owner: alastairruhm
+    name: ipsarch
+# Archive customization
+archive:
+  format: tar.gz
+  replacements:
+    amd64: 64-bit
+    darwin: macOS
+  files:
+    - README.md
+    - LICENSE
+
+brew:
+  github:
+    owner: alastairruhm
+    name: homebrew-tap
+
+  # Git author used to commit to the repository.
+  # Defaults are shown.
+  commit_author:
+    name: alastairruhm
+    email: alastairruhm@gmail.com
+
+  # Folder inside the repository to put the formula.
+  # Default is the root folder.
+  folder: Formula
+
+  # Caveats for the user of your binary.
+  # Default is empty.
+  caveats: ""
+
+  # Your app's homepage.
+  # Default is empty.
+  homepage: "https://github.com/alastairruhm/ipsearch"
+
+  # Your app's description.
+  # Default is empty.
+  description: "search ip location"
+
+  install: |
+    bin.install "ipsearch"

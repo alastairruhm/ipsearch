@@ -1,10 +1,12 @@
 language: go
+
 go: 
- - 1.7
+ - "1.8"
+ - "1.9"
 
 install:
   - go get github.com/mitchellh/gox
-  - go get github.com/tcnksm/ghr
+  # - go get github.com/tcnksm/ghr
   - go get github.com/mattn/goveralls
 
 script:
@@ -12,13 +14,14 @@ script:
  - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 after_success:
-  - gox -os "linux darwin" -arch "386 amd64" -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}"
+  # - gox -os "linux darwin" -arch "386 amd64" -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}"
+  - test -n "$TRAVIS_TAG" && curl -sL https://git.io/goreleaser | bash
 
-deploy:
-  provider: script
-  script: ghr --username alastairruhm --token $GITHUB_TOKEN --replace --debug $(git tag -l --contains HEAD) dist/
-  on:
-    tags: true
+# deploy:
+#   provider: script
+#   script: ghr --username alastairruhm --token $GITHUB_TOKEN --replace --debug $(git tag -l --contains HEAD) dist/
+#   on:
+#     tags: true
 
 notifications:
   slack: ruhm-pacino:vcSqblVd1vSDgaOzWLNbThfS
